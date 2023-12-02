@@ -8,4 +8,5 @@ public class SnakeNode {
         this.x = x;
         this.y = y;
     }
+    
 }

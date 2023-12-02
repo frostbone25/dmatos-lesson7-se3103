@@ -61,7 +61,7 @@ public class AppWindow extends JFrame {
     }
 
     public void goNextState() {
-        gameState.goNext(null);
+        gameState.goNext(this);
     }
 
     public GameState getGameState() {

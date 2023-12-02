@@ -41,7 +41,7 @@ public class AppCanvas extends JPanel {
     private void drawScore(Graphics2D g2, int score) {
         g2.setColor(Color.white);
         g2.setFont(new Font("Courier New", Font.BOLD, 24));
-        g2.drawString("Score: ", AppCanvas.WIDTH - 180, 30);
+        g2.drawString("Score: " + score, AppCanvas.WIDTH - 180, 30);
     }
 
     private void drawSnake(Graphics2D g2, Snake snake) {
