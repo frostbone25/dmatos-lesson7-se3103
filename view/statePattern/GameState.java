@@ -1,8 +1,9 @@
 package view.statePattern;
 
-import view.AppWindow;
+import view.ApplicationWindow;
 
-public interface GameState {
-    void goNext(AppWindow context);
+public interface GameState 
+{
+    void goNext(ApplicationWindow context);
     void animate();
 }

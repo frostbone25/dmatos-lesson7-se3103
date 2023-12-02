@@ -5,97 +5,121 @@ import java.util.ArrayList;
 import model.observerPattern.SnakeEvent;
 import model.observerPattern.SnakeObserver;
 import model.observerPattern.Subject;
-import view.AppCanvas;
-import view.AppWindow;
+import view.ApplicationCanvas;
+import view.ApplicationWindow;
 
-public class Snake implements Subject {
-    
-    public ArrayList<SnakeNode> nodes = new ArrayList<>();
+public class Snake implements Subject 
+{
+    public ArrayList<SnakeNode> snakeNodes = new ArrayList<>();
 
-    private final int INIT_XLOC = AppWindow.GRID_SIZE * 7;
-    private final int INIT_YLOC = AppWindow.GRID_SIZE * 3;
+    private final int INIT_XLOC = ApplicationWindow.GRID_SIZE * 7;
+    private final int INIT_YLOC = ApplicationWindow.GRID_SIZE * 3;
     private final int INIT_NODES = 6;
     private Direction direction;
 
-    private ArrayList<SnakeObserver> observers = new ArrayList<>();
+    private ArrayList<SnakeObserver> snakeObservers = new ArrayList<>();
 
-    public Snake() {
+    public Snake() 
+    {
         init();
     }
 
-    public void init() {
-        nodes.clear();
+    public void init() 
+    {
+        snakeNodes.clear();
         direction = Direction.RIGHT;
-        for(int i = 0; i < INIT_NODES; i++){
-            int x = INIT_XLOC - i * AppWindow.GRID_SIZE;
+
+        for(int i = 0; i < INIT_NODES; i++)
+        {
+            int x = INIT_XLOC - i * ApplicationWindow.GRID_SIZE;
             int y = INIT_YLOC;
-            nodes.add(new SnakeNode(x, y));
+            SnakeNode newSnakeNode = new SnakeNode(x, y);
+
+            snakeNodes.add(newSnakeNode);
         }
     }
 
-    public void move() {
-        for (int i = nodes.size() - 1; i > 0; i--) {
-            nodes.get(i).x = nodes.get(i - 1).x;
-            nodes.get(i).y = nodes.get(i - 1).y;
+    public void move() 
+    {
+        for (int i = snakeNodes.size() - 1; i > 0; i--) 
+        {
+            snakeNodes.get(i).x = snakeNodes.get(i - 1).x;
+            snakeNodes.get(i).y = snakeNodes.get(i - 1).y;
         }
-        SnakeNode head = nodes.get(0);
-        switch (direction) {
+
+        SnakeNode snakeHead = snakeNodes.get(0);
+
+        switch (direction) 
+        {
             case LEFT:
-                head.x -= AppWindow.GRID_SIZE;
+                snakeHead.x -= ApplicationWindow.GRID_SIZE;
                 break;
             case RIGHT:
-                head.x += AppWindow.GRID_SIZE;
+                snakeHead.x += ApplicationWindow.GRID_SIZE;
                 break;
             case UP:
-                head.y -= AppWindow.GRID_SIZE;
+                snakeHead.y -= ApplicationWindow.GRID_SIZE;
                 break;
             case DOWN:
-                head.y += AppWindow.GRID_SIZE;
+                snakeHead.y += ApplicationWindow.GRID_SIZE;
                 break;
         }
     }
 
-    public void falling() {
-        if (nodes.get(0).y >= AppCanvas.HEIGHT - AppWindow.GRID_SIZE) return;
-        for (int i = 0; i < nodes.size(); i++) {
-            nodes.get(i).y += 5;
-        }
+    public void falling() 
+    {
+        if (snakeNodes.get(0).y >= ApplicationCanvas.HEIGHT - ApplicationWindow.GRID_SIZE) 
+            return;
+
+        for (int i = 0; i < snakeNodes.size(); i++) 
+            snakeNodes.get(i).y += 5;
     }
 
-    public Direction getDirection() {
+    public Direction getDirection() 
+    {
         return direction;
     }
 
-    public void setDirection(Direction direction) {
+    public void setDirection(Direction direction) 
+    {
         this.direction = direction;
     }
 
     @Override
-    public void addObserver(SnakeObserver o) {
-        observers.add(o);
+    public void addObserver(SnakeObserver snakeObserver) 
+    {
+        snakeObservers.add(snakeObserver);
     }
 
     @Override
-    public void removeObserver(SnakeObserver o) {
-        observers.remove(o);
+    public void removeObserver(SnakeObserver snakeObserver) 
+    {
+        snakeObservers.remove(snakeObserver);
     }
 
     @Override
-    public void notifyObservers(SnakeEvent e) {
-        switch (e) {
+    public void notifyObservers(SnakeEvent snakeEvent) 
+    {
+        switch (snakeEvent) 
+        {
             case HIT_FOOD:
-                for(var o: observers)
-                    o.hitFood();
+
+                for(SnakeObserver snakeObserver: snakeObservers)
+                    snakeObserver.hitFood();
+
                 break;
             case HIT_SELF:
-                for (var o: observers)
-                    o.hitSelf();
+
+                for (SnakeObserver snakeObserver: snakeObservers)
+                    snakeObserver.hitSelf();
+
                 break;
             case HIT_WALL:
-                for (var o: observers)
-                    o.hitWall();
+
+                for (SnakeObserver snakeObserver: snakeObservers)
+                    snakeObserver.hitWall();
+
                 break;
         }
     }
-
 }

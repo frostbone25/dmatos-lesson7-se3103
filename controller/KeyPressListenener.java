@@ -5,33 +5,33 @@ import java.awt.event.KeyListener;
 
 import model.Direction;
 
-public class KeyPressListenener implements KeyListener {
+public class KeyPressListenener implements KeyListener 
+{
+    @Override
+    public void keyTyped(KeyEvent keyEvent) {}
 
     @Override
-    public void keyTyped(KeyEvent e) {
-    }
+    public void keyPressed(KeyEvent keyEvent) 
+    {
+        int keyCode = keyEvent.getKeyCode();
 
-    @Override
-    public void keyPressed(KeyEvent e) {
-        int key = e.getKeyCode();
-        switch (key) {
+        switch (keyCode) 
+        {
             case KeyEvent.VK_LEFT:
-                App.model.snake.setDirection(Direction.LEFT);
+                Application.gameModel.snake.setDirection(Direction.LEFT);
                 break;
             case KeyEvent.VK_RIGHT:
-                App.model.snake.setDirection(Direction.RIGHT);
+                Application.gameModel.snake.setDirection(Direction.RIGHT);
                 break;
             case KeyEvent.VK_UP:
-                App.model.snake.setDirection(Direction.UP);
+                Application.gameModel.snake.setDirection(Direction.UP);
                 break;
             case KeyEvent.VK_DOWN:
-                App.model.snake.setDirection(Direction.DOWN);
+                Application.gameModel.snake.setDirection(Direction.DOWN);
                 break;
         }
     }
 
     @Override
-    public void keyReleased(KeyEvent e) {
-    }
-    
+    public void keyReleased(KeyEvent keyEvent) {}
 }

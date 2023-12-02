@@ -1,27 +1,29 @@
 package view.statePattern;
 
-import controller.App;
-import view.AppWindow;
+import controller.Application;
+import view.ApplicationWindow;
 
-public class GameStatePlaying implements GameState {
-
-    public GameStatePlaying() {
-        App.win.startPauseButton.setText(AppWindow.PAUSE_ACTION);
-        App.win.restarButton.setEnabled(false);
-        App.win.startPauseButton.setEnabled(true);
+public class GameStatePlaying implements GameState 
+{
+    public GameStatePlaying() 
+    {
+        Application.applicationWindow.startPauseButton.setText(ApplicationWindow.PAUSE_ACTION);
+        Application.applicationWindow.restarButton.setEnabled(false);
+        Application.applicationWindow.startPauseButton.setEnabled(true);
     }
 
     @Override
-    public void goNext(AppWindow context) {
-        if (App.model.snakeHitsItsBody() || App.model.snakeLeftScene())
+    public void goNext(ApplicationWindow context) 
+    {
+        if (Application.gameModel.snakeHitsItsBody() || Application.gameModel.snakeLeftScene())
             context.setGameState(new GameStateOver());
         else
             context.setGameState(new GameStatePaused());
     }
 
     @Override
-    public void animate() {
-        App.model.snake.move();
+    public void animate() 
+    {
+        Application.gameModel.snake.move();
     }
-    
 }

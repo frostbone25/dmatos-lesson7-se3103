@@ -1,23 +1,23 @@
 package view.statePattern;
 
-import controller.App;
-import view.AppWindow;
+import controller.Application;
+import view.ApplicationWindow;
 
-public class GameStateInit implements GameState {
-
-    public GameStateInit() {
-        App.win.startPauseButton.setText(AppWindow.START_ACTION);
-        App.win.restarButton.setEnabled(false);
-        App.win.startPauseButton.setEnabled(true);
+public class GameStateInit implements GameState 
+{
+    public GameStateInit() 
+    {
+        Application.applicationWindow.startPauseButton.setText(ApplicationWindow.START_ACTION);
+        Application.applicationWindow.restarButton.setEnabled(false);
+        Application.applicationWindow.startPauseButton.setEnabled(true);
     }
 
     @Override
-    public void goNext(AppWindow context) {
+    public void goNext(ApplicationWindow context) 
+    {
         context.setGameState(new GameStatePlaying());
     }
 
     @Override
-    public void animate() {
-    }
-    
+    public void animate() {}
 }

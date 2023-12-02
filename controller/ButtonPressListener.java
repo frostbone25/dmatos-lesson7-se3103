@@ -3,35 +3,37 @@ package controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import view.AppWindow;
+import view.ApplicationWindow;
 
-public class ButtonPressListener implements ActionListener {
-
+public class ButtonPressListener implements ActionListener 
+{
     @Override
-    public void actionPerformed(ActionEvent e) {
-        String action = e.getActionCommand();
-        switch(action) {
-            case AppWindow.START_ACTION:
-                App.model.messages = null;
-                App.win.goNextState();
-                App.timer.start();
+    public void actionPerformed(ActionEvent actionEvent) 
+    {
+        String actionCommand = actionEvent.getActionCommand();
+
+        switch(actionCommand) 
+        {
+            case ApplicationWindow.START_ACTION:
+                Application.gameModel.messages = null;
+                Application.applicationWindow.goNextState();
+                Application.timer.start();
                 break;
-            case AppWindow.PAUSE_ACTION:
-                App.win.goNextState();
-                App.model.messages = "Paused - Press <Resume>";
-                App.timer.stop();
-                App.win.getCanvas().repaint();
+            case ApplicationWindow.PAUSE_ACTION:
+                Application.applicationWindow.goNextState();
+                Application.gameModel.messages = "Paused - Press <Resume>";
+                Application.timer.stop();
+                Application.applicationWindow.getCanvas().repaint();
                 break;
-            case AppWindow.RESTART_ACTION:
-                App.model.init();
-                App.win.goNextState();
-                App.timer.stop();
-                App.win.getCanvas().repaint();
+            case ApplicationWindow.RESTART_ACTION:
+                Application.gameModel.init();
+                Application.applicationWindow.goNextState();
+                Application.timer.stop();
+                Application.applicationWindow.getCanvas().repaint();
                 break;
-            case AppWindow.EXIT_ACTION:
+            case ApplicationWindow.EXIT_ACTION:
                 System.exit(0);
                 break;
         }
     }
-    
 }

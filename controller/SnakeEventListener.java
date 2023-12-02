@@ -3,24 +3,27 @@ package controller;
 import model.SnakeNode;
 import model.observerPattern.SnakeObserver;
 
-public class SnakeEventListener implements SnakeObserver {
-
+public class SnakeEventListener implements SnakeObserver 
+{
     @Override
-    public void hitFood() {
-        App.model.score += 10;
-        App.model.snake.nodes.add(new SnakeNode(-100, -100));
+    public void hitFood() 
+    {
+        Application.gameModel.score += 10;
+        SnakeNode newSnakeNode = new SnakeNode(-100, -100);
+        Application.gameModel.snake.snakeNodes.add(newSnakeNode);
     }
 
     @Override
-    public void hitWall() {
-        App.model.messages = "Hit the wall - Press <Restart>";
-        App.win.goNextState();
+    public void hitWall() 
+    {
+        Application.gameModel.messages = "Hit the wall - Press <Restart>";
+        Application.applicationWindow.goNextState();
     }
 
     @Override
-    public void hitSelf() {
-        App.model.messages = "Hit self body - Press <Restart>";
-        App.win.goNextState();
+    public void hitSelf() 
+    {
+        Application.gameModel.messages = "Hit self body - Press <Restart>";
+        Application.applicationWindow.goNextState();
     }
-    
 }

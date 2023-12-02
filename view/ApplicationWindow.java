@@ -2,7 +2,6 @@ package view;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
-
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -12,9 +11,9 @@ import controller.KeyPressListenener;
 import view.statePattern.GameState;
 import view.statePattern.GameStateInit;
 
-public class AppWindow extends JFrame {
-    
-    private AppCanvas canvas;
+public class ApplicationWindow extends JFrame 
+{
+    private ApplicationCanvas applicationCanvas;
     public static final int GRID_SIZE = 20;
 
     public JButton startPauseButton;
@@ -27,10 +26,11 @@ public class AppWindow extends JFrame {
 
     private GameState gameState;
 
-    public void init() {
-        Container cp = getContentPane();
-        canvas = new AppCanvas();
-        cp.add(canvas, BorderLayout.CENTER);
+    public void init() 
+    {
+        Container contentPane = getContentPane();
+        applicationCanvas = new ApplicationCanvas();
+        contentPane.add(applicationCanvas, BorderLayout.CENTER);
 
         JPanel southPanel = new JPanel();
         startPauseButton = new JButton(START_ACTION);
@@ -39,7 +39,7 @@ public class AppWindow extends JFrame {
         southPanel.add(startPauseButton);
         southPanel.add(restarButton);
         southPanel.add(exitButton);
-        cp.add(BorderLayout.SOUTH, southPanel);
+        contentPane.add(BorderLayout.SOUTH, southPanel);
 
         ButtonPressListener buttonPressListener = new ButtonPressListener();
         startPauseButton.addActionListener(buttonPressListener);
@@ -47,9 +47,9 @@ public class AppWindow extends JFrame {
         exitButton.addActionListener(buttonPressListener);
 
         KeyPressListenener keyPressListenener = new KeyPressListenener();
-        canvas.addKeyListener(keyPressListenener);
-        canvas.requestFocusInWindow();
-        canvas.setFocusable(true);
+        applicationCanvas.addKeyListener(keyPressListenener);
+        applicationCanvas.requestFocusInWindow();
+        applicationCanvas.setFocusable(true);
 
         // disable focusable in all other GUI components
         startPauseButton.setFocusable(false);
@@ -57,23 +57,25 @@ public class AppWindow extends JFrame {
         exitButton.setFocusable(false);
 
         gameState = new GameStateInit();
-
     }
 
-    public void goNextState() {
+    public void goNextState() 
+    {
         gameState.goNext(this);
     }
 
-    public GameState getGameState() {
+    public GameState getGameState() 
+    {
         return gameState;
     }
 
-    public void setGameState(GameState gameState) {
+    public void setGameState(GameState gameState) 
+    {
         this.gameState = gameState;
     }
 
-    public AppCanvas getCanvas() {
-        return canvas;
+    public ApplicationCanvas getCanvas() 
+    {
+        return applicationCanvas;
     }
-
 }
